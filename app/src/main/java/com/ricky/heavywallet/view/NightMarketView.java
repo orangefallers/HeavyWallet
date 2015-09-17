@@ -1,6 +1,6 @@
 package com.ricky.heavywallet.view;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -79,11 +79,11 @@ public class NightMarketView extends SurfaceView implements SurfaceHolder.Callba
     //int x1,y1,pm;
 
 
-    public NightMarketView(Context context, HeavyWalletActivity noactivity, int appViewWidth, int appViewHeight) {
-        super(context);
+    public NightMarketView(Activity activity, int appViewWidth, int appViewHeight) {
+        super(activity);
         getHolder().addCallback(this);
 
-        this.noactivity = noactivity;
+        this.noactivity = (HeavyWalletActivity) activity;
         this.appViewHeight = appViewHeight;
         this.appViewWidth = appViewWidth;
         r = getResources();

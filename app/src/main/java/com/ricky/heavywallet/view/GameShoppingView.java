@@ -1,6 +1,6 @@
 package com.ricky.heavywallet.view;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -122,11 +122,11 @@ public class GameShoppingView extends SurfaceView implements SurfaceHolder.Callb
     private int[] displaygivemoneycoordinate = new int[5]; //�x�s��ܪ��a�ҧ��K�Ϯy��
     int pm;
 
-    public GameShoppingView(Context context, HeavyWalletActivity noactivity, int appViewWidth, int appViewHeight) {
-        super(context);
+    public GameShoppingView(Activity activity, int appViewWidth, int appViewHeight) {
+        super(activity);
         getHolder().addCallback(this);
 
-        this.noactivity = noactivity;
+        this.noactivity = (HeavyWalletActivity) activity;
         this.appViewHeight = appViewHeight;
         this.appViewWidth = appViewWidth;
 

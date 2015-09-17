@@ -1,6 +1,6 @@
 package com.ricky.heavywallet.view;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,9 +30,9 @@ public class HowPlayView extends View implements Runnable {
     RectF displayhowplay = new RectF();
     RectF displayback = new RectF();
 
-    public HowPlayView(Context context, HeavyWalletActivity noactivity, int appViewWidth, int appViewHeight) {
-        super(context);
-        this.noactivity = noactivity;
+    public HowPlayView(Activity activity, int appViewWidth, int appViewHeight) {
+        super(activity);
+        this.noactivity = (HeavyWalletActivity) activity;
         this.appViewHeight = appViewHeight;
         this.appViewWidth = appViewWidth;
         displayhowplay.set(0, Ymove, this.appViewWidth, Ymove + Ybig);

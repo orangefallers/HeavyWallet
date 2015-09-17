@@ -1,9 +1,11 @@
 package com.ricky.heavywallet.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,11 +36,11 @@ public class GameRuleView extends RelativeLayout {
 	private HeavyWalletActivity hAct;
 	Rect RectSrc_howplay = new Rect();
 	
-	public GameRuleView(HeavyWalletActivity mAct, int w, int h) {
+	public GameRuleView(Activity mAct, int w, int h) {
 		super(mAct);
 		// TODO Auto-generated constructor stub
 		
-		this.hAct = mAct;
+		this.hAct = (HeavyWalletActivity) mAct;
 		this.appWidth = w;
 		this.appHeight = h;
 		mInflater = (LayoutInflater)hAct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,13 +71,18 @@ public class GameRuleView extends RelativeLayout {
 		final int imgWidth = mDecoder.getWidth();
 		final int imgHeight = mDecoder.getHeight();
 
-		int right = left + this.appWidth;
-		int bottom = top + this.appHeight;
+		//int right = left + this.appWidth;
+		//int bottom = top + this.appHeight;
+
+        int right = left + imgWidth;
+        int bottom = top + this.appHeight;
+        Log.w("GameRule", "right: " +right + " bottom: " + bottom);
 
 		ShowGoToGameBtn(false);
 		
 		if (right > imgWidth)
 			right = imgWidth;
+
 		if (bottom > imgHeight) {
 			top = imgHeight - this.appHeight;
 			bottom = imgHeight;
@@ -105,9 +112,9 @@ public class GameRuleView extends RelativeLayout {
 		}
 	}
 	
-	private void GoToGameShoppingView(){
+	private void GoToGameMainView(){
 		
-		this.hAct.ncHandler.sendEmptyMessage(HeavyWalletParameter.CHANGETO_GAMEVIEW);
+		this.hAct.ncHandler.sendEmptyMessage(HeavyWalletParameter.CHANGETO_GAMEMAINVIEW);
 	}
 
 	private OnClickListener clickListener = new OnClickListener(){
@@ -120,7 +127,7 @@ public class GameRuleView extends RelativeLayout {
 
 			case R.id.GotoGame:
 				// hAct.GameViewChangeHandler.sendEmptyMessage(HeavyWalletParameter.CHANGETO_GAMEMAINVIEW);
-				GoToGameShoppingView();
+                GoToGameMainView();
 				//hAct.GameViewChangeHandler.sendEmptyMessage(HeavyWalletParameter.CHANGETO_GAMEENDVIEW);
 				break;
 			}

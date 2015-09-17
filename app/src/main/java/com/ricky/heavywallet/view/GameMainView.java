@@ -1,6 +1,6 @@
 package com.ricky.heavywallet.view;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,11 +44,11 @@ public class GameMainView extends View implements Runnable {
     RectF scorenumber = new RectF();
     BitmapFactory.Options options = new BitmapFactory.Options();
 
-    public GameMainView(Context context, HeavyWalletActivity activity, int appViewWidth, int appViewHeight) {
-        super(context);
+    public GameMainView(Activity activity, int appViewWidth, int appViewHeight) {
+        super(activity);
         // TODO Auto-generated constructor stub
 
-        this.hAct = activity;
+        this.hAct = (HeavyWalletActivity) activity;
         this.appViewHeight = appViewHeight;
         this.appViewWidth = appViewWidth;
         options.inSampleSize = 2;

@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import com.ricky.heavywallet.util.HeavyWalletParameter;
 import com.ricky.heavywallet.util.goods;
 import com.ricky.heavywallet.view.GameMainView;
+import com.ricky.heavywallet.view.GameRuleView;
 import com.ricky.heavywallet.view.GameShoppingView;
 import com.ricky.heavywallet.view.HowPlayView;
 import com.ricky.heavywallet.view.NightMarketView;
@@ -24,7 +25,7 @@ import com.ricky.heavywallet.view.NightMarketView;
 
 public class HeavyWalletActivity extends Activity implements Runnable {
 
-    private DisplayMetrics mDisplayMetrics;
+    private DisplayMetrics mDisplayMetrics = new DisplayMetrics();
     private static int DeviceWidth;
     private static int DeviceHeight;
 
@@ -34,6 +35,8 @@ public class HeavyWalletActivity extends Activity implements Runnable {
     public GameShoppingView gaview;
     public GameMainView mainview;
     public HowPlayView howplayview;
+
+    private GameRuleView ruleView;
 
     Vibrator myVibrator;
 
@@ -49,8 +52,9 @@ public class HeavyWalletActivity extends Activity implements Runnable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_heavy_wallet);
-        setFullScreen();
 
+        mAct = this;
+        setFullScreen();
         setting = getSharedPreferences(HeavyWalletParameter.SCOREDATA, 0);
 
         delay.removeCallbacks(updateDelay);
@@ -60,10 +64,10 @@ public class HeavyWalletActivity extends Activity implements Runnable {
         goods.InitGoodsText(r);
         goods.InitNumberbmp(r);
 
-        mainview = new GameMainView(this, this, DeviceWidth, DeviceHeight);
-        nmview = new NightMarketView(this, this, DeviceWidth, DeviceHeight);
-        gaview = new GameShoppingView(this, this, DeviceWidth, DeviceHeight);
-        howplayview = new HowPlayView(this, this, DeviceWidth, DeviceHeight);
+        mainview = new GameMainView(this, DeviceWidth, DeviceHeight);
+        nmview = new NightMarketView(this, DeviceWidth, DeviceHeight);
+        gaview = new GameShoppingView(this, DeviceWidth, DeviceHeight);
+        howplayview = new HowPlayView(this, DeviceWidth, DeviceHeight);
 
         ncHandler.sendEmptyMessage(HeavyWalletParameter.CHANGETO_GAMEMAINVIEW);
 
@@ -160,8 +164,9 @@ public class HeavyWalletActivity extends Activity implements Runnable {
                     myVibrator.vibrate(500);
                     break;
                 case HeavyWalletParameter.CHANGETO_GAMERULE:
-                    howplayview.InitHowPlayView();
-                    setContentView(howplayview);
+//                    howplayview.InitHowPlayView();
+//                    setContentView(howplayview);
+                    ChangeToGameRuleView();
                     break;
 
                 default:
@@ -169,6 +174,15 @@ public class HeavyWalletActivity extends Activity implements Runnable {
             }
         }
     };
+
+    private void ChangeToGameRuleView() {
+        if (ruleView == null) {
+            ruleView = new GameRuleView(mAct, DeviceWidth, DeviceHeight);
+            setContentView(ruleView);
+        }
+
+    }
+
 
     private int[] Randgoodsprice() {
         int goods20[] = new int[20];

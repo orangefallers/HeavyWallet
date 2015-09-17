@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    signingConfigs{
+        release{
+            storeFile file('/Users/ricky/Desktop/build script/fuhu_android')
+            keyAlias "fuhu"
+            keyPassword "pass\$1214"
+            storePassword "pass\$1214"
+        }
+
+    }
+
+
+    defaultConfig {
+        applicationId "com.ricky.heavywallet"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile files('libs/cocos2d-android.jar')
+}
